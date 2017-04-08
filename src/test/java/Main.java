@@ -7,28 +7,22 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import static org.junit.Assert.assertTrue;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Main {
+    public WebDriver driver;
     private Object webDriver;
+//Negative test case for login to rozetka.com.ua
 
     public Object getWebDriver() {
 
         return webDriver;
     }
-//Negative test case for login to rozetka.com.ua
-
-    @After
-    public void Finish() {
-
-    }
-
-    public class JunitTest {
-        public WebDriver driver;
 
         @Test
         public void RosetkaTest() {
+            System.setProperty("webdriver.chrome.driver", "F:\\drivers\\chromedriver.exe");
+            driver = new ChromeDriver();
             driver.get("http://rozetka.com.ua/");
             WebElement NameSigninCabinet;
             NameSigninCabinet = driver.findElement(By.xpath(".//*[@id='header_user_menu_parent']/a"));
@@ -36,47 +30,12 @@ public class Main {
             NameSigninCabinet.click();
 
             final WebElement LoginEnterPage = driver.findElement(By.xpath(".//*[@id='popup_signin']/div"));
-
-            class LoginEnterPage {
-                public void loginEnter() {
-
-                    rozetkaLoginEnterPage loginEnterPage = new rozetkaLoginEnterPage(getWebDriver());
-                    loginEnterPage.loginEnterPageOpen();
-                    loginEnterPage.loginInput("Alex");
-                    loginEnterPage.passwordInput("13579");
-                    LoginEnterPage.click();
-
-                    assertTrue("User login and password are entered with incorrect login and password", loginEnterPage.loginPageEnter());
-                }
-
-
-            }
         }
+
+    @After
+    public void Finish() {
+        driver.quit();
+    }
 
 
     }
-
-    private class rozetkaLoginEnterPage {
-        public rozetkaLoginEnterPage(Object webDriver) {
-        }
-
-        public void passwordWrite(String s) {
-        }
-
-        public void passwordInput(String s) {
-        }
-
-        public void loginInput(String s) {
-        }
-
-        public void loginInput() {
-        }
-
-        public void loginEnterPageOpen() {
-        }
-
-        public boolean loginPageEnter() {
-            return false;
-        }
-    }
-}
